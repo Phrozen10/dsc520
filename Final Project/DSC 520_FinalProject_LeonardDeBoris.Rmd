@@ -1,0 +1,435 @@
+---
+title: "Criminal Justice - Recidivism"
+author: "DeBoris Leonard"
+date: "11/9/2020"
+output:
+  pdf_document: default
+  html_document:
+    code_folding: hide
+  word_document: default
+---
+
+```{r  include=FALSE}
+
+library(class)
+library(reticulate)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(tidyverse)
+library(TSdist)
+library(grid)
+library(gridExtra)
+library(survival)
+library(ggfortify)
+
+
+```
+
+INTRODUCTION:
+
+    Recidivism is the $10,000 word for the likely hood of a convicted criminal to repeat offend. In recent years, many courts have introduced programs using algorithms to predict recidivism and use the score these algorithms produce to decide things like cash bail and in some cases sentencing. Unfortunately, these tool that were created with positive intent have led to unintended consequences such as disparities in risk scores for similar offenses among different races and genders.
+
+    In this project we are going to look at data on recidivism from Broward County and ProPublica to see if there are any correlations to race and/or gender. I would then like to look at the COMPAS tool that is highly proliferated for use in determining recidivism and determine if there is bias built in this tool.
+
+    
+
+OBSERVATIONS:
+
+Total Count of Defendents:
+```{r echo=FALSE}
+#Assigning u clean data and counting rows
+base_data <- read.csv("C:/Users/debor/Documents/GitHub/dsc520/Final Project/compas-scores-two-years.csv")
+
+
+#Cleaning data by removing unneeded rows and filtering out none applicable data
+compas_df<- dplyr::select(base_data, age, c_charge_degree, race, age_cat, score_text, sex, priors_count, 
+                          days_b_screening_arrest, decile_score, is_recid, two_year_recid, c_jail_in, c_jail_out) %>% 
+    filter(days_b_screening_arrest <= 30) %>%
+    filter(days_b_screening_arrest >= -30) %>%
+    filter(is_recid != -1) %>%
+    filter(c_charge_degree != "O") %>%
+    filter(score_text != 'N/A')
+
+nrow(compas_df)
+
+```
+Age Range of Defendants:
+
+```{r echo=FALSE}
+summary(compas_df$age_cat)
+
+
+```
+    
+    Based on the data most defendants in fall between 25-45 years of age which aligns with the average age of residence of Broward County in 2017 of 40 years old.
+Total Defendants by Race:
+
+```{r echo=FALSE}
+summary(compas_df$race)
+```
+```{python }
+print("Black: %.2f%%" %             (3342 / 6011 * 100))
+print("White: %.2f%%" %             (1933 / 6011 * 100))
+print("Hispanic: %.2f%%" %          (403 / 6011 * 100))
+print("Other: %.2f%%" %             (304 / 6011 * 100))
+print("Asian: %.2f%%" %             (21  / 6011 * 100))
+print("Native American: %.2f%%"%    (8   / 6011 * 100))
+
+```
+
+    The percentage of defendants broken down by race shows that Black or African American individuals comprise over 55% of all defendants in the Broward County criminal justice system. When compared to population demographics of Broward County Black or African American individuals make up only 28.5% of population. This data suggests that almost 2% of the total Black or African American population makes up the majority of defendants in Broward county.  Let’s look at how this is broken down by gender.
+    
+Total Poluation by Gender:
+
+```{r echo=FALSE}
+summary(compas_df$sex)
+```
+Total Population by Gender and Race:
+
+```{r echo=FALSE}
+xtabs(~ sex + race, data=compas_df)
+```
+
+```{r echo=FALSE}
+blk_plt <- ggplot(data=filter(compas_df, race =="African-American"), aes(ordered(decile_score))) + 
+          geom_bar() + xlab("Decile Score") +
+          ylim(0, 600) + ggtitle("Black Defendant's Decile Scores")
+
+
+white_plt <- ggplot(data=filter(compas_df, race =="Caucasian"), aes(ordered(decile_score))) + 
+          geom_bar() + xlab("Decile Score") +
+          ylim(0, 600) + ggtitle("White Defendant's Decile Scores")
+
+hisp_plt <-ggplot(data=filter(compas_df, race =="Hispanic"), aes(ordered(decile_score))) + 
+          geom_bar() + xlab("Decile Score") +
+          ylim(0, 600) + ggtitle("Hispanic Defendant's Decile Scores")
+
+grid.arrange(blk_plt, white_plt, hisp_plt,  ncol = 2)
+
+```
+
+    The Decile Score is the measurement of the likelihood of recidivism. The higher the Decile Score the more likely a defendant is to repeat offend based on the logic of the COMPAS tool. When evaluating the scores of the top 3 populations, it shows that Black or African American defendants are likely to be repeat offenders at a much higher rate than other groups. Taking this data a face value and using this algorithm as a means to determine bail amounts or if there will be any bail permitted to a defendant, it could be inferred that Black or African Americans pose the greatest risk for recidivism. 
+    
+    But what if there is bias built in the algorithm? Could COMPAS' built in bias create a system that rates one race or gender higher than other? To do this we will take a look at how much error occurs in the COMPAS' algorithm predictions
+
+
+Decile Score by Race:
+```{r echo=FALSE}
+xtabs(~ decile_score + race, data=compas_df)
+```
+```{r echo=FALSE}
+compas_df <- mutate(compas_df, crime_factor = factor(c_charge_degree)) %>%
+      mutate(age_factor = as.factor(age_cat)) %>%
+      within(age_factor <- relevel(age_factor, ref = 1)) %>%
+      mutate(race_factor = factor(race)) %>%
+      within(race_factor <- relevel(race_factor, ref = 3)) %>%
+      mutate(gender_factor = factor(sex, labels= c("Female","Male"))) %>%
+      within(gender_factor <- relevel(gender_factor, ref = 2)) %>%
+      mutate(score_factor = factor(score_text != "Low", labels = c("LowScore","HighScore")))
+compas_model <- glm(score_factor ~ gender_factor + age_factor + race_factor +
+                            priors_count + crime_factor + two_year_recid, family="binomial", data=compas_df)
+summary(compas_model)
+
+control <- exp(-1.434355) / (1 + exp(-1.434355))
+exp(0.463824) / (1 - control + (control * exp(0.463824)))
+
+
+
+```
+
+    Based on the Broward County data Black or African American individuals are almost 43% more likely to receive a higher score for similar offenses to their white counterparts.
+```{r}
+exp(0.118109) / (1 - control + (control * exp(0.118109)))
+```
+
+    Women are almost 10% more likely to receive a higher score than their male counterparts.    
+
+    
+```{python }
+from sys import stdout
+from csv import DictReader, DictWriter
+
+class PeekyReader:
+    def __init__(self, reader):
+        self.peeked = None
+        self.reader = reader
+
+    def peek(self):
+        if self.peeked is None:
+            self.peeked = next(self.reader)
+        return self.peeked
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.peeked is not None:
+            ret = self.peeked
+            self.peeked = None
+            return ret
+        try:
+            return next(self.reader)
+        except StopIteration:
+            self.peeked = None
+            raise StopIteration
+
+
+class Person:
+    def __init__(self, reader):
+        self.__rows = []
+        self.__idx = reader.peek()['id']
+        try:
+            while reader.peek()['id'] == self.__idx:
+                self.__rows.append(next(reader))
+        except StopIteration:
+            pass
+
+    @property
+    def lifetime(self):
+        memo = 0
+        for it in self.__rows:
+            memo += int(it['end']) - int(it['start'])
+        return memo
+
+    @property
+    def recidivist(self):
+        return (self.__rows[0]['is_recid'] == "1" and
+                self.lifetime <= 730)
+
+    @property
+    def violent_recidivist(self):
+        return (self.__rows[0]['is_violent_recid'] == "1" and
+                self.lifetime <= 730)
+
+    @property
+    def low(self):
+        return self.__rows[0]['score_text'] == "Low"
+
+    @property
+    def high(self):
+        return not self.low
+
+    @property
+    def low_med(self):
+        return self.low or self.score == "Medium"
+
+    @property
+    def true_high(self):
+        return self.score == "High"
+
+    @property
+    def vlow(self):
+        return self.__rows[0]['v_score_text'] == "Low"
+
+    @property
+    def vhigh(self):
+        return not self.vlow
+
+    @property
+    def vlow_med(self):
+        return self.vlow or self.vscore == "Medium"
+
+    @property
+    def vtrue_high(self):
+        return self.vscore == "High"
+
+    @property
+    def score(self):
+        return self.__rows[0]['score_text']
+
+    @property
+    def vscore(self):
+        return self.__rows[0]['v_score_text']
+
+    @property
+    def race(self):
+        return self.__rows[0]['race']
+
+    @property
+    def valid(self):
+        return (self.__rows[0]['is_recid'] != "-1" and
+                (self.recidivist and self.lifetime <= 730) or
+                self.lifetime > 730)
+
+    @property
+    def compas_felony(self):
+        return 'F' in self.__rows[0]['c_charge_degree']
+
+    @property
+    def score_valid(self):
+        return self.score in ["Low", "Medium", "High"]
+
+    @property
+    def vscore_valid(self):
+        return self.vscore in ["Low", "Medium", "High"]
+
+    @property
+    def rows(self):
+        return self.__rows
+
+
+def count(fn, data):
+    return len(list(filter(fn, list(data))))
+
+
+def t(tn, fp, fn, tp):
+    surv = tn + fp
+    recid = tp + fn
+    print("           \tLow\tHigh")
+    print("Survived   \t%i\t%i\t%.2f" % (tn, fp, surv / (surv + recid)))
+    print("Recidivated\t%i\t%i\t%.2f" % (fn, tp, recid / (surv + recid)))
+    print("Total: %.2f" % (surv + recid))
+    print("False positive rate: %.2f" % (fp / surv * 100))
+    print("False negative rate: %.2f" % (fn / recid * 100))
+    spec = tn / (tn + fp)
+    sens = tp / (tp + fn)
+    ppv = tp / (tp + fp)
+    npv = tn / (tn + fn)
+    prev = recid / (surv + recid)
+    print("Specificity: %.2f" % spec)
+    print("Sensitivity: %.2f" % sens)
+    print("Prevalence: %.2f" % prev)
+    print("PPV: %.2f" % ppv)
+    print("NPV: %.2f" % npv)
+    print("LR+: %.2f" % (sens / (1 - spec)))
+    print("LR-: %.2f" % ((1-sens) / spec))
+
+
+def table(recid, surv, prefix=''):
+    tn = count(lambda i: getattr(i, prefix + 'low'), surv)
+    fp = count(lambda i: getattr(i, prefix + 'high'), surv)
+    fn = count(lambda i: getattr(i, prefix + 'low'), recid)
+    tp = count(lambda i: getattr(i, prefix + 'high'), recid)
+    t(tn, fp, fn, tp)
+
+
+def hightable(recid, surv, prefix=''):
+    tn = count(lambda i: getattr(i, prefix + 'low_med'), surv)
+    fp = count(lambda i: getattr(i, prefix + 'true_high'), surv)
+    fn = count(lambda i: getattr(i, prefix + 'low_med'), recid)
+    tp = count(lambda i: getattr(i, prefix + 'true_high'), recid)
+    t(tn, fp, fn, tp)
+
+
+def vtable(recid, surv):
+    table(recid, surv, prefix='v')
+
+
+def vhightable(recid, surv):
+    hightable(recid, surv, prefix='v')
+
+
+def is_race(race):
+    return lambda x: x.race == race
+
+
+def write_two_year_file(f, pop, test, headers):
+    headers = list(headers)
+    headers.append('two_year_recid')
+    with open(f, 'w') as o:
+        writer = DictWriter(o, fieldnames=headers)
+        writer.writeheader()
+        for person in pop:
+            row = person.rows[0]
+            if getattr(person, test):
+                row['two_year_recid'] = 1
+            else:
+                row['two_year_recid'] = 0
+
+            if person.compas_felony:
+                row['c_charge_degree'] = 'F'
+            else:
+                row['c_charge_degree'] = 'M'
+            writer.writerow(row)
+            stdout.write('.')
+
+
+def create_two_year_files():
+    people = []
+    headers = []
+    with open("C:/Users/debor/Documents/GitHub/dsc520/Final Project/cox-violent-parsed.csv") as f:
+        reader = PeekyReader(DictReader(f))
+        try:
+            while True:
+                p = Person(reader)
+                if p.valid:
+                    people.append(p)
+        except StopIteration:
+            pass
+        headers = reader.reader.fieldnames
+
+    pop = list(filter(lambda i: (i.recidivist and i.lifetime <= 730) or
+                      i.lifetime > 730,
+                      filter(lambda x: x.score_valid, people)))
+
+    vpop = list(filter(lambda i: (i.violent_recidivist and i.lifetime <= 730) or
+                       i.lifetime > 730,
+                       filter(lambda x: x.vscore_valid, people)))
+
+    write_two_year_file("./compas-scores-two-years.csv", pop,
+                        'recidivist', headers)
+    write_two_year_file("./compas-scores-two-years-violent.csv", vpop,
+                        'violent_recidivist', headers)
+
+
+if __name__ == "__main__":
+    create_two_year_files()
+
+
+```
+
+```{python}
+
+people = []
+with open("C:/Users/debor/Documents/GitHub/dsc520/Final Project/cox-violent-parsed.csv") as f:
+    reader = PeekyReader(DictReader(f))
+    try:
+        while True:
+            p = Person(reader)
+            if p.valid:
+                people.append(p)
+    except StopIteration:
+        pass
+
+pop = list(filter(lambda i: ((i.recidivist == True and i.lifetime <= 730) or
+                              i.lifetime > 730), list(filter(lambda x: x.score_valid, people))))
+recid = list(filter(lambda i: i.recidivist == True and i.lifetime <= 730, pop))
+rset = set(recid)
+surv = [i for i in pop if i not in rset]
+
+print("All Defendants:\n")
+table(list(recid), list(surv))
+
+
+
+
+
+```
+
+    The test reveals that there is an overall false positive rate of 30.6% for all defendants when comparing the actual rate of recidivism vs COMPAS predictions.  
+    
+```{python}
+print("Black Defendants:\n")
+is_afam = is_race("African-American")
+table(list(filter(is_afam, recid)), list(filter(is_afam, surv)))
+
+print("\nWhite Defendants:\n")
+is_white = is_race("Caucasian")
+table(list(filter(is_white, recid)), list(filter(is_white, surv)))
+
+print("\nHispanic Defendants:\n")
+is_hisp = is_race("Hispanic")
+table(list(filter(is_hisp, recid)), list(filter(is_hisp, surv)))
+```
+    
+    After reviewing the data for the top 3 population groups it was determined that Black or African Americans had a 42% false positive rate, Whites and Hispanics had a 21% false positive rate. 
+    
+    It would be easy to assume that COMPAS is biased based on these numbers. However, taking look at the numbers more closely, it reveals that there is an error rate of almost 31% for all defendants. COMPAS is very conservative in regard to risk and its predictions appear to be built with a bias towards all defendants recidivating. 
+    
+    I cannot conclude based on this that COMPAS is biased against Black people. These numbers do, however, show an issue with criminal justice, as a whole. Blacks are the 3rd largest group behind Whites and Hispanics, respectively. Does COMPAS tend to error on the high end for Blacks because of some genetic predisposition to committing crimes? Or is COMPAS learning that it sees Blacks more often and as a machine is making a logical connection that it will see this person again due to implicit bias in policing within black communities?
+
+
+    
+    
+

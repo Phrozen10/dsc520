@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<codeBook xsi:schemaLocation="ddi:codebook:2_5 http://www.ddialliance.org/Specification/DDI-Codebook/2.5/XMLSchema/codebook.xsd" xmlns="ddi:codebook:2_5"  version="2.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <docDscr>
+        <citation>
+            <titlStmt>
+                <titl>Metadata record for Evaluation of the Red Hook Community Justice Center in Brooklyn, [New York City, New York], 1998-2010</titl>
+                <IDNo agency="ICPSR">34742</IDNo>
+            </titlStmt>
+            <prodStmt>
+                <producer abbr="ICPSR">Inter-university Consortium for Political and Social Research</producer>
+                <copyright>ICPSR metadata records are licensed under a Creative Commons Attribution-Noncommercial 3.0 United States License <ExtLink URI="http://creativecommons.org/licenses/by-nc/3.0/us/"/>..</copyright>
+            </prodStmt>
+            <verStmt>
+                <version date="2016-09-29">V1</version>
+            </verStmt>
+        </citation>
+    </docDscr>
+    <stdyDscr>
+        <citation>
+            <titlStmt>
+                <titl>Evaluation of the Red Hook Community Justice Center in Brooklyn, [New York City, New York], 1998-2010</titl>
+                <IDNo agency="ICPSR">34742</IDNo>
+                <IDNo agency="dara">http://doi.org/10.3886/ICPSR34742.v1</IDNo>
+            </titlStmt>
+            <rspStmt>
+                <AuthEnty affiliation="National Center for State Courts">Lee, Cynthia G.</AuthEnty>
+                <AuthEnty affiliation="National Center for State Courts">Cheesman, Fred L. (Fred Louis)</AuthEnty>
+                <AuthEnty affiliation="National Center for State Courts">Rottman, David</AuthEnty>
+                <AuthEnty affiliation="Center for Court Innovation">Swaner, Rachel</AuthEnty>
+                <AuthEnty affiliation="Center for Court Innovation">Lambson, Suvi</AuthEnty>
+                <AuthEnty affiliation="Center for Court Innovation">Rempel, Mike</AuthEnty>
+                <AuthEnty affiliation="John Jay College">Curtis, Richard</AuthEnty>
+            </rspStmt>
+            <prodStmt>
+                <copyright> <ExtLink URI="https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/34742/terms ">ICPSR Terms of Use</ExtLink></copyright>
+                <fundAg>United States Department of Justice. Office of Justice Programs. National Institute of Justice</fundAg>
+                <grantNo agency="United States Department of Justice. Office of Justice Programs. National Institute of Justice">2009-IJ-CX-0016</grantNo>
+            </prodStmt>
+            <distStmt>
+                <distrbtr abbr="ICPSR" affiliation="Institute for Social Research, University of Michigan">Ann Arbor, MI: Inter-university Consortium for Political and Social Research</distrbtr>
+                <distDate date="2020-11-08"/>
+            </distStmt>
+            <serStmt>
+                <serName/>
+            </serStmt>
+            <verStmt>
+                <version date="2016-09-29">V1</version>
+            </verStmt>
+            <biblCit>
+  Lee, Cynthia G., Cheesman, Fred L. (Fred Louis), Rottman, David, Swaner, Rachel, Lambson, Suvi, Rempel, Mike, and Curtis, Richard. Evaluation of the Red Hook Community Justice Center in Brooklyn, [New York City, New York], 1998-2010. Inter-university Consortium for Political and Social Research [distributor], 2016-09-29. https://doi.org/10.3886/ICPSR34742.v1
+</biblCit>
+            <holdings URI="https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/34742"></holdings>
+        </citation>
+        <stdyInfo>
+            <subject>
+                <keyword vocab="thesaurus"> community decision making</keyword>
+                <keyword vocab="thesaurus"> community organizations</keyword>
+                <keyword vocab="thesaurus"> court cases</keyword>
+                <keyword vocab="thesaurus"> courtroom proceedings</keyword>
+                <keyword vocab="thesaurus"> courts</keyword>
+                <keyword vocab="thesaurus"> local government</keyword>
+                <keyword vocab="thesaurus"> misdemeanor offenses</keyword>
+                <keyword vocab="thesaurus"> recidivism </keyword>
+            </subject>
+            <abstract contentType="abstract">These data are part of NACJD's Fast Track Release and are distributed as they there received from the data depositor. The files have been zipped by NACJD for release, but not checked or processed except of the removal of direct identifiers. Users should refer to the accompany readme file for a brief description of the files available with this collections and consult the investigator(s) if further information is needed.The study examined four research questio (1) Was the Red Hook Community Justice Center (RHCJC) implemented according to plan?; (2) Did RHCJC make a difference in sanctioning, recidivism, and arrests?; (3) How did RHCJC produce any observed reductions to recidivism and arrests?; and (4) Is RHCJC cost-efficient from the viewpoint of taxpayers?
+The community survey (Red Hook Resident Data, n = 95) was administered by research teams in the spring and summer of 2010. Teams generally went house-to-house ringing apartment buzzers at varying times of day, usually on the weekend when working people are more likely to be home or approached people on the sitting on park benches to conduct interviews.In autumn 2010, the research team administered a survey to 200 misdemeanor offenders (Red Hook Offender Data, n = 205) who were recruited from within the catchment area of the Red Hook Community Justice Center (RHCJC) using Respondent Driven Sampling (RDS).To examine how the RHCJC was implemented (Red Hook Process Evaluation Data, n= 35,465 and Red Hook Work File Data, n= 3,127), the research team relied on a diverse range of data sources, including 52 structured group and individual interviews with court staff and stakeholders carried out over five site visits; observation of courtroom activities and staff meetings; extensive document review; and analysis of case-level data including all adult criminal cases and some juvenile delinquency cases processed at the Justice Center from 2000 through 2009.  To aid in understanding the RHCJC's impact on the overall level of crime in the catchment area, researchers obtained monthly counts (Arrest Data, n = 144) of felony and misdemeanor arrests in each of the three catchment area police precincts (the 72nd, 76th, and 78th precincts).</abstract>
+            <abstract contentType="purpose">PURPOSE OF THE STUDY: The study examined four research questioWas the Red Hook Community Justice Center (RHCJC) implemented according to plan?Did RHCJC make a difference in sanctioning, recidivism, and arrests?How did RHCJC produce any observed reductions to recidivism and arrests?Is RHCJC cost-efficient from the viewpoint of taxpayers?</abstract>
+            <abstract contentType="mixed">STUDY DESIGN: The community survey (Red Hook Resident Data, n = 95) was administered in teams, usually one faculty member and several students, in the spring and summer of 2010. In west Red Hook, where there are few people on the street and few usable public spaces, teams generally went house-to-house ringing apartment buzzers at varying times of day, usually on the weekend when working people are more likely to be home. Interviews were conducted on the doorstep or the sidewalk. In east Red Hook, in public housing, there is a greater density of people and little pocket parks between buildings where the teams were able to approach people sitting on the benches to conduct interviews.In autumn 2010, the research team administered a survey to 200 misdemeanor offenders (Red Hook Offender Data, n = 205) who were recruited from within the catchment area of the Red Hook Community Justice Center (RHCJC) using Respondent Driven Sampling (RDS). The first 100 offender interviews were done in Coffey Park, which sits between east and west Red Hook, and is adjacent to the RHCJC and the Red Hook Houses. Interviews were conducted in a small community room in the semi-indoor concrete park building that housed public restrooms, park maintenance equipment and the office of the park custodian. The second 100 interviews were completed over three days in November 2010 at the far end of the RHCJC's catchment area in the community room of a building that housed Sunset Park's Community Board 7.To examine how the RHCJC was implemented (Red Hook Process Evaluation Data, n= 35,465 and Red Hook Work File Data, n= 3,127), the research team relied on a diverse range of data sources, including 52 structured group and individual interviews with court staff and stakeholders carried out over five site visits; observation of courtroom activities and staff meetings; extensive document review; and analysis of case-level data including all adult criminal cases and some juvenile delinquency cases processed at the Justice Center from 2000 through 2009.To aid in understanding the RHCJC's impact on the overall level of crime in the catchment area, researchers obtained monthly counts (Arrest Data, n = 144) of felony and misdemeanor arrests in each of the three catchment area police precincts (the 72nd, 76th, and 78th precincts). For comparison researchers also obtained monthly counts of felony and misdemeanor arrest in each of five Brooklyn precincts adjacent to the catchment area (the 66th, 68th, 70th, 71st, and 84th precincts). Each data series cover the period January 1998 through December 2009.</abstract>
+            <abstract contentType="mixed">DESCRIPTION OF VARIABLES: The community survey data (Red Hook Resident Data, 9 variables, n = 95) includes variables on the respondent's race, whether they own or rent, the respondents' knowledge of the Red Hood Community Justice Center (RHCJC) and programs offered by the RHCJC, if the respondent had ever been to court in New York City, if so, which court, and what happened, and any problems or annoyances in the neighborhood.The offender data (Red Hook Offender Data, 31 variables, n = 205) includes respondent demographic variables (race, age, country and state of birth, gender, education level, and how income is earned), variables ask if the respondent has been arrested in the past three years, experience with the RHCJC, programs through the RHCJC, and if the respondent knew others who had been through the RHCJC.The process evaluation includes two data files. The Red Hook Process Evaluation Data (20 variables, n = 35,465) includes variables on whether the respondent had been arraigned in RHCJC or downtown court, case disposition, sanctions imposed, treatments received, and outcomes of the sanctions and treatments. The Red Hook Work File Data (272 variables, n = 3,127) includes arrestee age, race, sex, date of crime, date of arrest, top charge, disposition, rearrests and for what type of crime, convictions (felony or misdemeanor), outstanding warrants, sentencing information, type of attorney for defendant, and precinct.The arrest data (Arrest Data, 26 variables, n = 144) includes total crime, total number of felonies, and total number of misdemeanors by precinct by month for the period of January 1998 through December 2009.</abstract>
+            <abstract contentType="mixed">PRESENCE OF COMMON SCALES: None</abstract>
+            <sumDscr>
+                <timePrd event="start" cycle="C1" date="2008"/>
+                <timePrd event="end" cycle="C1" date=" 2010 (Red Hook Offender Data)"/>
+                <timePrd event="single" date="2010 (Community Survey Data)"/>
+                <timePrd event="start" cycle="C2" date="1998-01"/>
+                <timePrd event="end" cycle="C2" date=" 2009-12 (Arrest Data)"/>
+                <timePrd event="start" cycle="C3" date="2000"/>
+                <timePrd event="end" cycle="C3" date=" 2009 (Process Evaluation Data)"/>
+                <collDate event="start" cycle="C1" date="2010-10"/>
+                <collDate event="end" cycle="C1" date=" 2010-11 (Red Hook Offender Data"/>
+                <collDate event="single" date="Autumn)"/>
+                <collDate event="single" date="2010 (Community Survey Data"/>
+                <collDate event="single" date="Spring and Summer)"/>
+                <collDate event="start" cycle="C2" date="1998-01"/>
+                <collDate event="end" cycle="C2" date=" 2009-12 (Arrest Data)"/>
+                <collDate event="start" cycle="C3" date="2000"/>
+                <collDate event="end" cycle="C3" date=" 2009 (Process Evaluation Data)"/>
+                <geogCover>New York City</geogCover>
+                <geogCover>United States</geogCover>
+                <geogCover>Brooklyn</geogCover>
+                <geogCover>New York (state)</geogCover>
+                <geogUnit>neighborhood</geogUnit>
+                <anlyUnit>Precinct</anlyUnit>
+                <anlyUnit>Individual</anlyUnit>
+                <universe>The universe for the community survey is all residents of Red Hook New York in the spring and summer of 2010. The universe for the offender data is all offenders in the catchment area of the Red Hook Community Justice Center in October and November of 2010. The universe for the arrest data is all crimes committed in the selected police precincts between January 1998 and December 2009. The universe of the process evaluation includes all defendants arrested on misdemeanor offenses in the Red Hook catchment area with a disposition no later than 2008. </universe>
+                <dataKind> administrative records data</dataKind>
+                <dataKind> survey data </dataKind>
+            </sumDscr>
+        </stdyInfo>
+        <method>
+            <dataColl>
+                <timeMeth>Longitudinal</timeMeth>
+                <timeMeth>Cross-sectional</timeMeth>
+                <sampProc><p>To recruit the sample for the community survey (Red Hook Resident Data,  n = 95), researchers selected three blocks of residential row-house on the west side, usually called "The Back", and two blocks on the east side, usually called "The Front", for door-to-door and intercept interviews. These were supplemented by intercept interviews from respondents recruited on Van Brunt Street a main thoroughfare in the Red Hook neighborhood. These different locations were chosen because they represent the main divisions of the neighborhood between the mostly white residents on the west side and the mostly residents of color on the east side.</p> <p>The offender survey (Red Hook Offender Data, n = 205) was administered to 200 misdemeanor offenders that were recruited within the catchment area of the Red Hook Community Justice Center (RHCJC) using Respondent Driven Sampling (RDS). RDS starts with a small number of initial research subjects, called "seed", who are recruited, interviewed by the researchers, and paid for their time and effort, in this case twenty dollars. Following these interviews, the seeds receive three numbered coupons with instructions to pass them to friends or associates who were also misdemeanor offenders (in the last three years). When coupons are redeemed by eligible subjects, their recruiter is compensated with ten dollars for each coupon redeemed. The eligible referred by the seeds comprise the first wave of the sample; they were each interviewed, paid twenty dollars and given three coupons to recruit the next wave of study participants. Study participants are recruited in this fashion until the desired sample size is reached.</p> <p>The sample for the process evaluation (Red Hook Process Evaluation Data, n= 35,465 and Red Hook Work File Data, n= 3,127) included 3,247 cases; 1,576 process at the Red Hook Community Justice Center and 1,671 processed in Kings County Criminal Court in downtown Brooklyn. These defendants were all arraigned on misdemeanor criminal charges with a final case disposition in 2008. All defendants were arrested within the Red Hook geographic catchment area, which comprises three of Brooklyn's 23 police precincts: the 76th precinct, which covers the Red Hook neighborhood, and the 72nd and 78th precincts, which cover surrounding neighborhoods.</p></sampProc>
+                <collMode>record abstracts</collMode>
+                <collMode> face-to-face interview</collMode>
+                <sources>
+                    <dataSrc>Kings County Criminal Court, Red Hook Community Justice Center</dataSrc>
+                </sources>
+                <weight>None.</weight>
+            </dataColl>
+            <anlyInfo>
+                <respRate>Not applicable.</respRate>
+            </anlyInfo>
+        </method>
+        <dataAccs>
+            <setAvail media="online">
+                <accsPlac URI="https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/34742">Inter-university Consortium for Political and Social Research</accsPlac>
+            </setAvail>
+            <useStmt>
+                <specPerm>Additional special permissions, where applicable, are described in the restrictions field </specPerm>
+                <restrctn>Access to these data is restricted. Users interested in obtaining these data must complete a Restricted Data Use Agreement,specify the reason for the request, and obtain IRB approval or notice of exemption for their research.</restrctn>
+            </useStmt>
+        </dataAccs>
+        <notes>These data are part of NACJD's Fast Track Release  and are distributed as they were received from the data depositor. The files have been zipped by NACJD for release, but  not checked or processed except for the removal of direct identifiers. Users should refer to the accompanying readme file for a brief description of the files available with this collection and consult the investigator(s) if further information is needed.</notes>
+        <notes>The public-use data files in this collection are available for access by the general public. Access does not require affiliation with an ICPSR member institution.</notes>
+        <notes>One or more files in this data collection have special restrictions. Restricted data files are not available for direct download from the website; click on the Restricted Data button to learn more.</notes>
+        <notes>The citation of this study may have changed due to the new version control system that has been implemented.</notes>
+    </stdyDscr>
+</codeBook>
